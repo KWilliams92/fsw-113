@@ -8,24 +8,25 @@
     document.querySelector('#grades').textContent = "Curved Grades Show Here"
     document.querySelector('#scores').value = ""
     });
+let sum, sumGrades, aryGrades, minGrade, maxGrade, mean, gradeSlice;
 
 function applyBell(grade, index, ary){
     switch (true) {
-        case grade >= (mean + (gradeSlice * 2)): 
+        case grade >= mean + (gradeSlice * 2): 
             ary[index] = 'A';
-            break
-        case grade >= (mean + gradeSlice): 
+            break;
+        case grade >= mean + (gradeSlice): 
             ary[index] = 'B';
-            break
-        case grade >= (mean):
+            break;
+        case grade >= mean:
             ary[index] = 'C';
-            break
-        case grade >= (mean - gradeSlice): 
+            break;
+        case grade >= mean - (gradeSlice): 
             ary[index] = 'D';
-            break
+            break;
         default:
             ary[index] = 'F';
-            break
+            break;
     };
 };
 
@@ -34,7 +35,7 @@ function convertArray(obj) {
     ary = ary.map(function (x){
         return parseInt(x);
     });
-    return ary
+    return ary;
 };
 
 // Condense the number of lines within the curveGrade() function as much as possible by converting 
@@ -44,17 +45,17 @@ function convertArray(obj) {
 
 function curveGrades() {
     
-const sumGrades = array =>(array.reduce((accumulator,currentValue) => (accumulator+currentValue)));
-    
-    let aryGrades = convertArray(document.querySelector('#scores'));
-        const minGrade = aryGrades.reduce((a, b) => Math.min(a, b));
-        const maxGrade = aryGrades.reduce((a, b) => Math.max(a, b));
+    sum = (accumulator, currentValue) => accumulator + currentValue;
+    sumGrades = array => array.reduce(sum);
+    aryGrades = convertArray(document.querySelector('#scores'));
+        
+         minGrade = aryGrades.reduce((a, b) => Math.min(a, b));
+         maxGrade = aryGrades.reduce((a, b) => Math.max(a, b));
     
 mean = sumGrades(aryGrades) / aryGrades.length;
-gradeSlice = maxGrade - minGrade / 5;
-aryGrades.forEach(applyBell);
+gradeSlice = (maxGrade - minGrade) / 5;
+        aryGrades.forEach(applyBell);
 
     // write the value of aryGrades to the grades div in the HTML document
-    document.querySelector('#grades').textContent = aryGrades
-
-}
+    document.querySelector('#grades').innerHTML = aryGrades;
+};
