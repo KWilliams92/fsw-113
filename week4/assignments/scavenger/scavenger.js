@@ -1,29 +1,29 @@
 // Create an event listenter for the 'submit' button that calls the combineLists() function
     document.querySelector('#submit').addEventListener('click', function()  {
         // Then use the spread operator to combine these arrays into a single array.
-        const nodeList = document.querySelectorAll('textarea');
-        const aryResponses = [...nodeList];
-        combineLists(aryResponses);
+        const nodeList = document.querySelectorAll('textarea')
+        const aryResponses = [...nodeList]
+        combineLists(aryResponses)
     }
-        );  
+        )
 
 // Modify the combineLists() function to create arrays from each scavenger hunt element in the scavenger.html document.
 function combineLists(ary) {
-    let str = '';
+    let str = ''
     ary.forEach((item) => {
         str += `<p> ${item.id}<br />${item.value}</p>`
-    });
+    })
 // Sort that array and display it in the 'AllItems' element on the scavenger.html document.
-    document.querySelector('#AllItems').innerHTML = str;
+    document.querySelector('#AllItems').innerHTML = str
 
-};
+}
 
 // The following code is a bonus addition that facilitates data entry on the scavenger.html document.
 // If you first click in one of the textareas, you can then click scavenger hunt items in the unordered
 // list. The value of that will be added to the appropriate textarea along with any necessary commas.
 
-let objTargetText; 
-const objUL = document.querySelector('#lstItems');
+let objTargetText 
+const objUL = document.querySelector('#lstItems')
 
 objUL.onclick = function(event) {
     var source = getEventTarget(event)
@@ -31,13 +31,13 @@ objUL.onclick = function(event) {
         objTargetText.innerHTML = source.innerHTML
     else
         objTargetText.innerHTML += ',' + source.innerHTML
-};
+}
 
 function getEventTarget(e) {
     e = e || window.event
     return e.target || e.srcElement
-};
+}
 
 function setTarget(obj) {
     objTargetText = obj
-};
+}
